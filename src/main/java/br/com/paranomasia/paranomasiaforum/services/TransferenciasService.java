@@ -87,9 +87,14 @@ public class TransferenciasService {
 		Long idDoUsuario = usuarioLogado.getId();
 		
 		Sort sort = Sort.by("id").descending();
-		List<Transferencias> consultaDeTransferenciasComIdDoUsuario = transferenciasRepository.findByIdDoUsuario(idDoUsuario, sort);
+		Transferencias ultimaTransferencia;
+		try {
+			List<Transferencias> consultaDeTransferenciasComIdDoUsuario = transferenciasRepository.findByIdDoUsuario(idDoUsuario, sort);
+			 ultimaTransferencia = consultaDeTransferenciasComIdDoUsuario.get(0);
+		} catch(Exception e) {
+			ultimaTransferencia = null;
+		}
 		
-		Transferencias ultimaTransferencia = consultaDeTransferenciasComIdDoUsuario.get(0);
 		
 		if(ultimaTransferencia.isCreditoJaDepositado() == false && ultimaTransferencia.getStatus() == 3) {
 			System.out.println("Estamos debitando o valor na sua conta");
