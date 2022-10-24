@@ -1,5 +1,7 @@
 package br.com.paranomasia.paranomasiaforum.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.paranomasia.paranomasiaforum.model.Contas;
 import br.com.paranomasia.paranomasiaforum.model.Topico;
+import br.com.paranomasia.paranomasiaforum.model.Transferencias;
 import br.com.paranomasia.paranomasiaforum.services.ContasService;
 import br.com.paranomasia.paranomasiaforum.services.CurtidasService;
 import br.com.paranomasia.paranomasiaforum.services.TopicosService;
+import br.com.paranomasia.paranomasiaforum.services.TransferenciasService;
 
 @Controller
 @RequestMapping("/")
@@ -37,6 +42,9 @@ public class ForumController {
 	
 	@Autowired
 	private Curtir curtir;
+	
+	@Autowired
+	private TransferenciasService transferenciasService;
 	
 	@RequestMapping(value="/registro", method=RequestMethod.GET)
 	public String registrar(Contas contas) {
@@ -99,6 +107,8 @@ public class ForumController {
 		//Busca no repositorio
 		Page<Topico> topicos = topicosService.findAll(paginacao);
 		
+		//atualizando saldo
+		transferenciasService.atualizacaoDeSaldo();
 		
 		
 		//Autenticacao e HTML
@@ -118,4 +128,24 @@ public class ForumController {
 		return "redirect:" + referrer;
 	}
 	
+	@RequestMapping(value="/adicionarfundos", method=RequestMethod.GET)
+	public String adicionarfundos(Transferencias transferencia) {
+		
+		return "criarpagamento";
+	}
+	
+	@RequestMapping(value="/criarpagamento", method=RequestMethod.POST)
+	public String criarpagamento(@Valid Transferencias transferencia, BindingResult result) {
+		
+		return transferenciasService.create(transferencia);
+		
+	}
+	
+	@RequestMapping(value="/consultasaldo", method=RequestMethod.GET)
+	public @ResponseBody String consultasaldo() {
+		
+		transferenciasService.atualizacaoDeSaldo();
+		return "";
+		
+	}
 }

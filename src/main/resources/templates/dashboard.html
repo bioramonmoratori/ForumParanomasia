@@ -30,13 +30,20 @@
 					<p align="center" class="logo fs-1 p-3">P A R A N O M Á S I A</p>
 				</div>
 				<nav class="navbar m-3">
-				<p class="textoPixel fs-2">Bem-Vindo, <span style="background-color:#ffb703;" th:text="${usuarioLogado.nome}">Usuário</span>!</p>
+				<p class="textoPixel fs-2">Bem-Vindo, <span style="background-color:#1CD0FF;" th:text="${usuarioLogado.nome}">Usuário</span>!</p>
 
 				<form align="right" class="m-3" th:action="@{/logout}" method="POST">
 					<a href="/logout"><button style="" class="btn btn-outline-light textoPixel fs-5" type="submit">Logout</button></a>
 				</form>
 				</nav>
+				<div>
+				<p class="textoPixel fs-2">Saldo: $<span style="background-color:#ffb703;" th:text="${usuarioLogado.saldo}">$$$</span>
 				
+					<a href="/adicionarfundos/"><button
+							class="btn btn-outline-light p-2 textoPixel fs-4" type="submit">+$$$</button></a>
+				</p>
+				</div>
+
 		</div>
 		</div>
 

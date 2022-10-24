@@ -47,6 +47,7 @@ public class ContasService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String senhaCriptografada = passwordEncoder.encode(conta.getPassword());
 		conta.setSenha(senhaCriptografada);
+		conta.setSaldo(0);
 		
 		//Setando perfil
 		Optional<Perfil> perfilOptional = perfilRepository.findByNome("ROLE_USUARIO");

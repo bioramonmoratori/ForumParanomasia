@@ -34,6 +34,8 @@ public class Contas implements UserDetails{
 	@NotBlank @NotNull
 	private String senha;
 	
+	private double saldo;
+	
 	//Anotacao para trazer as roles junto ao chamar o objeto
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
@@ -73,6 +75,13 @@ public class Contas implements UserDetails{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public double getSaldo() {
+		return this.saldo;
+	}
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;		
+	}
+	
 	//--------------------------------------------
 	
 	//Spring Security
@@ -116,5 +125,9 @@ public class Contas implements UserDetails{
 	public void adicionarPerfil(Perfil perfil) {
 	    this.perfis.add(perfil);
 	}
+
+
+
+
 	
 }
