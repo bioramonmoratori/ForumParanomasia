@@ -61,7 +61,7 @@ public class ContasService {
 		Perfil perfil = perfilOptional.get();
 		conta.adicionarPerfil(perfil);
 		
-		//CriandoTransferenciaInicial-
+		//CriandoTransferenciaInicial
 		transferencia.setCodigoDaTransferencia("000");
 		transferencia.setCreditoJaDepositado(false);
 		transferencia.setIdDoUsuario(conta.getId());
@@ -69,6 +69,7 @@ public class ContasService {
 		transferencia.setSaldoFinal(0.00);
 		transferencia.setStatus(1);
 		transferencia.setValor(0.00);
+		transferencia.setDataDaTransferencia("");
 		transferenciaService.saveAndFlush(transferencia);
 		
 		contasRepository.save(conta);
