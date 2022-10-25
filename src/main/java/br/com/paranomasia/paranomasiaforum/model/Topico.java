@@ -61,7 +61,7 @@ public class Topico {
 	}
 	public double getAvaliacao() {
 		double avaliacaoFormatada = this.avaliacao;
-		DecimalFormat formato = new DecimalFormat("#.##"); 
+		DecimalFormat formato = new DecimalFormat("#.#"); 
 		avaliacaoFormatada = Double.valueOf(formato.format(avaliacaoFormatada));
 		return avaliacaoFormatada;
 	}
