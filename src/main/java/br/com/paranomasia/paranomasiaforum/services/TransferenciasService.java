@@ -90,23 +90,26 @@ public class TransferenciasService {
 		Transferencias ultimaTransferencia;
 		try {
 			List<Transferencias> consultaDeTransferenciasComIdDoUsuario = transferenciasRepository.findByIdDoUsuario(idDoUsuario, sort);
-			 ultimaTransferencia = consultaDeTransferenciasComIdDoUsuario.get(0);
+			ultimaTransferencia = consultaDeTransferenciasComIdDoUsuario.get(0);
 		} catch(Exception e) {
 			ultimaTransferencia = null;
 		}
 		
-		
-		if(ultimaTransferencia.isCreditoJaDepositado() == false && ultimaTransferencia.getStatus() == 3) {
-			System.out.println("Estamos debitando o valor na sua conta");
-			
-			usuarioLogado.setSaldo(ultimaTransferencia.getSaldoFinal());
-			contasRepository.save(usuarioLogado);
-			
-			ultimaTransferencia.setCreditoJaDepositado(true);
-			
-			this.saveAndFlush(ultimaTransferencia);
+		if(ultimaTransferencia != null) {
+			if (ultimaTransferencia.isCreditoJaDepositado() == false && ultimaTransferencia.getStatus() == 3) {
+				System.out.println("Estamos debitando o valor na sua conta");
+
+				usuarioLogado.setSaldo(ultimaTransferencia.getSaldoFinal());
+				contasRepository.save(usuarioLogado);
+
+				ultimaTransferencia.setCreditoJaDepositado(true);
+
+				this.saveAndFlush(ultimaTransferencia);
+			} else {
+				System.out.println("A ultima adição de fundos já foi debitada ou o pagamento ainda nao foi confirmado");
+			}
 		} else {
-			System.out.println("A ultima adição de fundos já foi debitada ou o pagamento ainda nao foi confirmado");
+			
 		}
 	}
 }
