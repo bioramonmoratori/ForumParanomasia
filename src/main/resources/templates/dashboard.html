@@ -76,7 +76,7 @@
 			<div class="m-5"><div class="alert alert-light" role="alert"><span style="color:#000000" class="logo fs-4" th:text="${topico.mensagem}">Mensagem</span></div></div>
 			<div align="right" class="m-3 textoPixel fs-6">
 				<div>Usuário: <span style="color:#000000;" th:text=" ${topico.nomeDoUsuario} ">Usuário</span></div>
-				<div>Avaliação: <span type="number" step="0.1" style="background-color:#591CFF; color:#ffffff;" th:text="${topico.avaliacao.format('%.2f/', n)}">0.0</span></div>
+				<div>Avaliação: <span type="number" step="0.1" style="background-color:#591CFF; color:#ffffff;" th:text="${topico.avaliacao}">0.0</span></div>
 				
 				<span class="p-2" th:if="${curtidas.jaFoiCurtido(topico.id, usuarioLogado.id)}">
 				

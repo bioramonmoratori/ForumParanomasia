@@ -1,5 +1,7 @@
 package br.com.paranomasia.paranomasiaforum.model;
 
+import java.text.DecimalFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -58,7 +60,10 @@ public class Topico {
 		this.mensagem = mensagem;
 	}
 	public double getAvaliacao() {
-		return avaliacao;
+		double avaliacaoFormatada = this.avaliacao;
+		DecimalFormat formato = new DecimalFormat("#.##"); 
+		avaliacaoFormatada = Double.valueOf(formato.format(avaliacaoFormatada));
+		return avaliacaoFormatada;
 	}
 	public void setAvaliacao(double avaliacao) {
 		
