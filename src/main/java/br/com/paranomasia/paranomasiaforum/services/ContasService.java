@@ -23,6 +23,7 @@ public class ContasService {
 	@Autowired
 	private PerfilRepository perfilRepository;
 	
+	@Autowired
 	private Transferencias transferencia;
 	
 	@Autowired
