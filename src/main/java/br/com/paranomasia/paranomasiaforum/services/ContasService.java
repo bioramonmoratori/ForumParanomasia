@@ -24,9 +24,6 @@ public class ContasService {
 	private PerfilRepository perfilRepository;
 	
 	@Autowired
-	private Transferencias transferencia;
-	
-	@Autowired
 	private TransferenciasService transferenciaService;
 	
 	public String create(Contas conta, BindingResult result) {
@@ -60,6 +57,8 @@ public class ContasService {
 		Optional<Perfil> perfilOptional = perfilRepository.findByNome("ROLE_USUARIO");
 		Perfil perfil = perfilOptional.get();
 		conta.adicionarPerfil(perfil);
+		
+		Transferencias transferencia = new Transferencias();
 		
 		//CriandoTransferenciaInicial
 		transferencia.setCodigoDaTransferencia("000");
