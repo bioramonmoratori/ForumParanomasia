@@ -45,8 +45,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 		
 		http.csrf().disable()
 		.authorizeRequests()
+		.antMatchers("/css/**", "/images/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/inicio/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/registro/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/documentacao").permitAll()
 		.antMatchers(HttpMethod.POST, "/novo/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/cartaodecredito/**").permitAll()
 		.antMatchers(HttpMethod.POST, "/cartaodecredito/**").permitAll()

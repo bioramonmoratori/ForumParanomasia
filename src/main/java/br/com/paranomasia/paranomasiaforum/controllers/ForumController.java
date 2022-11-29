@@ -66,6 +66,13 @@ public class ForumController {
 		
 	}
 	
+	@RequestMapping(value="/documentacao", method=RequestMethod.GET)
+	public String documentacao() {
+		
+		return "documentacao";
+		
+	}
+	
 	@GetMapping("/")
 	public String dashboard(Model model, Integer page, Integer filter) {
 		
